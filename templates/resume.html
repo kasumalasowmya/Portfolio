@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}Resume - My Portfolio{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>My Resume</h1>
+        <p class="breadcrumb">Home > Resume</p>
+    </div>
+</div>
+
+<section class="resume-section">
+    <div class="container">
+        <div class="resume-grid">
+            <div class="resume-upload">
+                <h2>Upload Your Resume</h2>
+                <p>Share your resume for future opportunities or download mine below.</p>
+                
+                <form method="POST" enctype="multipart/form-data" class="upload-form">
+                    <div class="file-input-wrapper">
+                        <input type="file" id="resume_file" name="resume_file" required 
+                               accept=".pdf,.txt,.doc,.docx,.png,.jpg,.jpeg,.gif"
+                               class="file-input">
+                        <label for="resume_file" class="file-label">
+                            <span class="file-icon">📄</span>
+                            <span class="file-text">Choose a file or drag it here</span>
+                            <span class="file-hint">Supported: PDF, DOC, DOCX, TXT, PNG, JPG (Max 16MB)</span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-full">Upload Resume</button>
+                </form>
+                
+                <h3>Download My Resume</h3>
+                <p>Get a copy of my professional resume:</p>
+                <a href="#" class="btn btn-secondary" download>Download Resume (PDF)</a>
+            </div>
+            
+            <div class="resume-content">
+                <h2>{{ site_owner }}</h2>
+                
+                <div class="resume-section">
+                    <h3>Objective</h3>
+                    <p>To succeed in an environment of growth and excellence and earn a job which provides me job satisfaction and self-development and helps me achieve personal as well as organizational goals.</p>
+                </div>
+                
+                <div class="resume-section">
+                    <h3>Core Skills</h3>
+                    <ul class="skills-list">
+                        <li>Core Java</li>
+                        <li>C fundamentals</li>
+                        <li>Python (Data processing & ML)</li>
+                        <li>Web Development (HTML, CSS, JavaScript, Flask)</li>
+                        <li>Teamwork, Communication, Problem Solving, Leadership</li>
+                    </ul>
+                </div>
+                
+                <div class="resume-section">
+                    <h3>Academic Project (Minor)</h3>
+                    <div class="resume-item">
+                        <h4>Room Occupancy Detection using Artificial Intelligence & Machine Learning</h4>
+                        <p>Description: Room occupancy detection is the process of identifying whether a room is occupied by using sensor data inputs to monitor presence and activity. Implemented preprocessing, feature extraction and applied classification models to detect occupancy.</p>
+                    </div>
+                </div>
+                
+                <div class="resume-section">
+                    <h3>Education</h3>
+                    <div class="resume-item">
+                        <h4>B.Tech – Computer Science and Engineering</h4>
+                        <span class="resume-date">2022 – 2026</span>
+                        <p>Mother Teresa Institute Of Science and Technology — CGPA: 8.5</p>
+                    </div>
+                    <div class="resume-item">
+                        <h4>Intermediate (MPC)</h4>
+                        <span class="resume-date">2020 – 2022</span>
+                        <p>KGBV Palvancha — 75.4</p>
+                    </div>
+                    <div class="resume-item">
+                        <h4>10th Class</h4>
+                        <span class="resume-date">2019 – 2020</span>
+                        <p>ZPHS Aswaraopeta — Aggregate: 10.0</p>
+                    </div>
+                </div>
+                
+                <div class="resume-section">
+                    <h3>Certifications & Activities</h3>
+                    <ul class="skills-list">
+                        <li>NPTEL - Foundation of Cloud, IoT & Edge ML</li>
+                        <li>Cisco NetAcad - Essentials of C</li>
+                        <li>Cisco NetAcad - Essentials of Python 1</li>
+                        <li>Internshala - Web Development</li>
+                        <li>NPTEL - Big Data Computing</li>
+                        <li>36-hour Hackathon: Data Science/ML/AI (Participation)</li>
+                        <li>Participated in a Two Days Workshop on Advancements in Data Visualization Techniques</li>
+                        <li>Participated in a Three Days Workshop on Data Science-ML-AI</li>
+                        <li>Participated and certified in the Hackathon on AI tools usage-2026 by BE10X</li>
+                    </ul>
+                    <h4>Workshops & Hackathons</h4>
+                    <ul class="skills-list">
+                        <li>Two Days Workshop on Advancements in Data Visualization Techniques</li>
+                        <li>Three Days Workshop on Data Science-ML-AI</li>
+                        <li>Hackathon on AI tools usage-2026 by BE10X (Certified Participant)</li>
+                    </ul>
+                    <p><strong>Extra-curricular:</strong> Participating in technical challenges, organizing cultural activities, active member of college technical club.</p>
+                    <p><strong>Location:</strong> Aswaraopeta</p>
+                    <p><strong>Contact:</strong> +91 8186834638 | sowmyakasumula@gmail.com</p>
+                </div>
+        </div>
+    </div>
+</section>
+
+<section class="uploaded-files-section">
+    <div class="container">
+        <h2>Uploaded Resumes</h2>
+        
+        {% if uploaded_files %}
+        <div class="files-list">
+            {% for file in uploaded_files|reverse %}
+            <div class="file-item">
+                <div class="file-info">
+                    <span class="file-name">{{ file.original_name }}</span>
+                    <span class="file-date">{{ file.upload_time }}</span>
+                </div>
+                <a href="{{ url_for('download', filename=file.filename) }}" class="btn btn-small">Download</a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="no-files">No resumes uploaded yet.</p>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}
